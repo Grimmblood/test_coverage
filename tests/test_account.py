@@ -9,6 +9,7 @@ from models.account import Account, DataValidationError
 
 ACCOUNT_DATA = {}
 
+
 class TestAccountModel(TestCase):
     """Test Account Model"""
 
