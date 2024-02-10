@@ -31,7 +31,7 @@ def update_counter(name):
         return {'Message': f'Counter {name} not found'}, status.HTTP_404_NOT_FOUND
     if name in COUNTERS:
         if COUNTERS[name] is None:
-                return {name: COUNTERS[name]}, status.HTTP_204_NO_CONTENT
+            return {name: COUNTERS[name]}, status.HTTP_204_NO_CONTENT
         COUNTERS[name] = COUNTERS[name] + 1
         return {name: COUNTERS[name]}, status.HTTP_200_OK
 
