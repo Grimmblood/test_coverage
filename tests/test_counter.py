@@ -37,6 +37,7 @@ class CounterTest(TestCase):
         self.assertEqual(result.status_code, status.HTTP_409_CONFLICT)
 
     def test_update_counter(self):
+        """ It should update the counter """
         result = self.client.put('/counters/testCounter')
         self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -46,6 +47,8 @@ class CounterTest(TestCase):
         # Ensure that it returned a successful return code
         self.assertEqual(result.status_code, status.HTTP_201_CREATED)
 
+        # check the counter value as a baseline
+        result_base = result.get_data(True)
         # call to update the counter I just created
         result = self.client.put('/counters/testCounter')
 
@@ -56,6 +59,7 @@ class CounterTest(TestCase):
         # self.assertEqual(result_base, result.get_data(True))
 
     def test_read_counter(self):
+        """ It should read the counter """
         result = self.client.get('/counters/testReadCounter')
         self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -73,3 +77,20 @@ class CounterTest(TestCase):
 
         # ensure a successful error code
         self.assertEqual(result.status_code, status.HTTP_200_OK)
+
+    def test_delete_counter(self):
+        """ It should delete the counter """
+        result = self.client.delete('/counters/testDeleteCounter')
+        self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
+
+        # create a counter
+        result = self.client.post('/counters/testDeleteCounter')
+
+        # ensure successful error code
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+
+        # delete the created counter
+        del_result = self.client.delete('/counters/testDeleteCounter')
+
+        # ensure successful error code
+        self.assertEqual(del_result.status_code, status.HTTP_204_NO_CONTENT)
