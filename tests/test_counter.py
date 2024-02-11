@@ -46,8 +46,6 @@ class CounterTest(TestCase):
         # Ensure that it returned a successful return code
         self.assertEqual(result.status_code, status.HTTP_201_CREATED)
 
-        # check the counter value as a baseline
-        result_base = result.get_data(True)
         # call to update the counter I just created
         result = self.client.put('/counters/testCounter')
 
