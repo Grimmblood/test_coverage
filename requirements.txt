@@ -5,4 +5,4 @@ pinocchio
 coverage
 pylint
 flake8
-sqlalchemy
+flask_sqlalchemy
